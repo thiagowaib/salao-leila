@@ -12,6 +12,36 @@ const routes = new express.Router()
  */
 const {AuthTokenAcesso} = require('./middlewares')
 
+// * Definição dos endpoints
+/**
+ * Endpoints referentes ao controlador de Admins
+ * (controllers/ControllerAdmins/index.js)
+ */
+const { novoAdmin, loginAdmin } = require('./controllers/ControllerAdmins')
+routes.post('/novoAdmin', novoAdmin)
+routes.post('/loginAdmin', loginAdmin)
+
+/**
+ * Endpoints referentes ao controlador de Clientes
+ * (controllers/ControllerClientes/index.js)
+ */
+const { novoCliente, loginCliente } = require('./controllers/ControllerClientes')
+routes.post('/novoCliente', novoCliente)
+routes.post('/loginCliente', loginCliente)
+
+/**
+ * Endpoints referentes ao controlador de Serviços
+ * (controllers/ControllerServicos/index.js)
+ */
+const { novoServico } = require('./controllers/ControllerServicos')
+routes.post('/novoServico', AuthTokenAcesso, novoServico)
+
+/**
+ * Endpoints referentes ao controlador de Agendamentos
+ * (controllers/ControllerAgendamentos/index.js)
+ */
+const { agendar } = require('./controllers/ControllerAgendamentos')
+routes.post('/agendar', AuthTokenAcesso, agendar)
 
 // * Exportação das rotas para main.js
 module.exports = routes
