@@ -11,7 +11,9 @@ const schema = new mongoose.Schema({
     },
     inicio: {
         type: Number,
-        default: 0,
+        default: 8,
+        min: 8,
+        max: 18,
         required: [true, "O agendamento precisa ter um início estipulado"]
     },
     valor: {

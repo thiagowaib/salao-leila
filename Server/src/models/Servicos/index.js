@@ -16,13 +16,6 @@ const schema = new mongoose.Schema({
         min: 0,
         required: [true, "O serviço precisa ter um preço"]
     },
-    duracao: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 480,
-        required: [true, "O serviço precisa ter uma duração estipulada"]
-    },
 }, {timestamps: true})
 
 
