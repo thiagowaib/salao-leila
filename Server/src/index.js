@@ -38,7 +38,7 @@ const initServer = () => {
      */
     const server = require('http').Server(app)
     server.listen(process.env.SERVER_PORT, () => {
-        console.log(`Servidor online na porta ${process.env.SERVER_PORT}`)
+        console.log(`Servidor online em http://localhost:${process.env.SERVER_PORT}/`)
     })
 }
 
