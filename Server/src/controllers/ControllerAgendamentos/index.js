@@ -43,6 +43,11 @@ module.exports = {
     async agendar(req, res) {
         if(req.payload.belongsTo !== "Clientes") return res.status(403).send({message: "Permissão negada [Clientes]"})
         const { data, inicio, servico_nome, cliente_email} = req.body
+
+        const diaData = data.split('/')[0]
+        const mesData = data.split('/')[1]
+        const anoData = data.split('/')[2]
+        if(new Date(anoData, parseInt(mesData)-1, diaData).getTime() <= new Date().getTime()) return res.status(400).send({message: "Data está no passado"})
         
         Agendamentos.findOne({data, inicio}, async(err, obj) => {
             // Validação de erro e agendamento já realizado
