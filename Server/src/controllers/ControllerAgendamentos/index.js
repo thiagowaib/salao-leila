@@ -78,5 +78,72 @@ module.exports = {
                 else return res.status(201).send({message: "Agendamento realizado com sucesso"})
             })
         })
+    },
+
+    /**
+     * @api {get} /buscarAgendamentos Buscar Agendamentos
+     * @apiName buscarAgendamentos
+     * @apiGroup Agendamentos
+     * @apiVersion 1.0.0
+     * 
+     * @apiPermission Admins | Clientes
+     * @apiHeader {String} auth Token de acesso JWT
+     * @apiHeaderExample {json} Exemplo de Header:
+     * {
+     *  "auth": [Token de Acesso JWT]
+     * }
+     * 
+     * @apiBody {String} [email] Email do cliente (para busca por cliente)
+     * 
+     * @apiSuccessExample Sucesso(200) Busca por Cliente [Admin | Cliente]:
+     * {
+     *  message: "Busca por cliente feita",
+     *  agendamentos: [{ObjetoAgendamento}, ...]
+     * }
+     * @apiSuccessExample Sucesso(200) Busca Geral [Admin]:
+     * {
+     *  message: "Busca geral feita",
+     *  agendamentos: [{ObjetoAgendamento}, ...]
+     * }
+     * @apiErrorExample Erro(404) Busca por Cliente:
+     * {
+     *  message: "Cliente não encontrado"
+     * }
+     * @apiErrorExample Erro(500):
+     * {
+     *  message: "Erro de Servidor",
+     *  error: {ErrorObject}
+     * }
+     */
+    async buscarAgendamentos(req, res) {
+        const {email} = req.body
+
+        if(email && email!=="") //Busca por cliente
+        {
+            // Busca o cliente referente ao agendamento
+            const cliente = await Clientes.findOne({email})
+            if(cliente===null) return res.status(404).send({message: "Cliente não encontrado"})
+
+            Agendamentos.find({cliente_id: cliente._id.toString()}, (err, objs) => {
+                // Validação de erro
+                if(err) return res.status(500).send({message: "Erro de servidor", error: err})
+
+                // Retorna os agendamentos
+                return res.status(200).send({message: "Busca por cliente feita", agendamentos: objs})
+            })
+        }
+        else //Busca geral
+        {
+            if(req.payload.belongsTo !== "Admins") return res.status(403).send({message: "Permissão negada [Admins]"})
+            Agendamentos.find({}, (err, objs) => {
+                // Validação de erro
+                if(err) return res.status(500).send({message: "Erro de servidor", error: err})
+
+                // Retorna os agendamentos
+                return res.status(200).send({message: "Busca geral feita", agendamentos: objs})
+            })
+        }
+
+        
     }
 }

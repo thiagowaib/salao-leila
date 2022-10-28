@@ -62,6 +62,42 @@ module.exports = {
     },
 
     /**
+     * @api {get} /buscarServicos Buscar Serviços
+     * @apiName buscarServicos
+     * @apiGroup Serviços
+     * @apiVersion 1.0.0
+     * 
+     * @apiPermission Admins
+     * @apiHeader {String} auth Token de acesso JWT
+     * @apiHeaderExample {json} Exemplo de Header:
+     * {
+     *  "auth": [Token de Acesso JWT]
+     * }
+     * 
+     * @apiSuccessExample Sucesso(200):
+     * {
+     *  message: "Busca feita",
+     *  servicos: [{ObjetoServico}, ...]
+     * }
+     * @apiErrorExample Erro(500):
+     * {
+     *  message: "Erro de Servidor",
+     *  error: {ErrorObject}
+     * }
+     */
+    buscarServicos(req, res) {
+        if(req.payload.belongsTo !== "Admins") return res.status(403).send({message: "Permissão negada [Admins]"})
+
+        Servicos.find({}, (err, objs) => {
+            // Validação de erro
+            if(err) return res.status(500).send({message: "Erro de servidor", error: err})
+
+            // Retorna os serviços
+            return res.status(200).send({message: "Busca feita", servicos: objs})
+        })
+    },
+
+    /**
      * @api {put} /modificarServico Modificar Serviço
      * @apiName modificarServico
      * @apiGroup Serviços
@@ -132,8 +168,8 @@ module.exports = {
     },
 
     /**
-     * @api {delete} /modificarServico Modificar Serviço
-     * @apiName modificarServico
+     * @api {delete} /removerServico Remover Serviço
+     * @apiName removerServico
      * @apiGroup Serviços
      * @apiVersion 1.0.0
      * 

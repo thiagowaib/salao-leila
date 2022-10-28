@@ -34,8 +34,9 @@ routes.delete('/removerCliente', AuthTokenAcesso, removerCliente)
  * Endpoints referentes ao controlador de Serviços
  * (controllers/ControllerServicos/index.js)
  */
-const { novoServico, modificarServico, removerServico } = require('./controllers/ControllerServicos')
+const { novoServico, buscarServicos, modificarServico, removerServico } = require('./controllers/ControllerServicos')
 routes.post('/novoServico', AuthTokenAcesso, novoServico)
+routes.get('/buscarServicos', AuthTokenAcesso, buscarServicos)
 routes.put('/modificarServico', AuthTokenAcesso, modificarServico)
 routes.delete('/removerServico', AuthTokenAcesso, removerServico)
 
@@ -43,8 +44,9 @@ routes.delete('/removerServico', AuthTokenAcesso, removerServico)
  * Endpoints referentes ao controlador de Agendamentos
  * (controllers/ControllerAgendamentos/index.js)
  */
-const { agendar } = require('./controllers/ControllerAgendamentos')
+const { agendar, buscarAgendamentos } = require('./controllers/ControllerAgendamentos')
 routes.post('/agendar', AuthTokenAcesso, agendar)
+routes.get('/buscarAgendamentos', AuthTokenAcesso, buscarAgendamentos)
 
 // * Exportação das rotas para main.js
 module.exports = routes
