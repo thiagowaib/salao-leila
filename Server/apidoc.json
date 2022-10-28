@@ -1,0 +1,10 @@
+{
+    "name": "API Salão da Leila",
+    "version": "1.0.0",
+    "description": "Documentação da API criada para o sistema do Salão de Beleza da Leila",
+    "title": "LeilAPI",
+    "url": "http://localhost:3000",
+    "template": {
+        "showRequiredLabels": true
+    }
+}
