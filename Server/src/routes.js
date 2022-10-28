@@ -25,16 +25,19 @@ routes.post('/loginAdmin', loginAdmin)
  * Endpoints referentes ao controlador de Clientes
  * (controllers/ControllerClientes/index.js)
  */
-const { novoCliente, loginCliente } = require('./controllers/ControllerClientes')
+const { novoCliente, loginCliente, removerCliente } = require('./controllers/ControllerClientes')
 routes.post('/novoCliente', novoCliente)
 routes.post('/loginCliente', loginCliente)
+routes.delete('/removerCliente', AuthTokenAcesso, removerCliente)
 
 /**
  * Endpoints referentes ao controlador de Serviços
  * (controllers/ControllerServicos/index.js)
  */
-const { novoServico } = require('./controllers/ControllerServicos')
+const { novoServico, modificarServico, removerServico } = require('./controllers/ControllerServicos')
 routes.post('/novoServico', AuthTokenAcesso, novoServico)
+routes.put('/modificarServico', AuthTokenAcesso, modificarServico)
+routes.delete('/removerServico', AuthTokenAcesso, removerServico)
 
 /**
  * Endpoints referentes ao controlador de Agendamentos

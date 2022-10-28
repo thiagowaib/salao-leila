@@ -1,6 +1,6 @@
 // * Importações
 const jwt = require('jsonwebtoken')
-const { Clientes } = require('../../models')
+const { Clientes, Agendamentos } = require('../../models')
 
 // * Exportação dos métodos do Controller
 module.exports = {
@@ -113,6 +113,75 @@ module.exports = {
             } else {
                 return res.status(401).send({message: "Senha invalida"})
             }
+        })
+    },
+
+    /**
+     * @api {delete} /removerCliente Remover Cliente
+     * @apiName removerCliente
+     * @apiGroup Clientes
+     * @apiVersion 1.0.0
+     * 
+     * @apiPermission Clientes
+     * @apiHeader {String} auth Token de acesso JWT
+     * @apiHeaderExample {json} Exemplo de Header:
+     * {
+     *  "auth": [Token de Acesso JWT]
+     * }
+     * 
+     * @apiBody {String} email Email do cliente
+     * 
+     * @apiSuccessExample Sucesso(200):
+     * {
+     *  message: "Cliente descadastrado com sucesso"
+     * }
+     * @apiErrorExample Erro(403):
+     * {
+     *  message: "Impossível descadastrar o cliente enquanto há agendamentos pendentes"
+     * }
+     * @apiErrorExample Erro(404):
+     * {
+     *  message: "Cliente não encontrado"
+     * }
+     * @apiErrorExample Erro(500):
+     * {
+     *  message: "Erro de Servidor",
+     *  error: {ErrorObject}
+     * }
+     */
+    async removerCliente(req, res){
+        if(req.payload.belongsTo !== "Clientes") return res.status(403).send({message: "Permissão negada [Clientes]"})
+        const {email} = req.body
+
+        // Busca o Cliente
+        const cliente = await Clientes.findOne({email})
+        if(cliente===null) return res.status(404).send({message: "Cliente não encontrado"})
+
+        // Confere se existem agendamentos pendentes
+        const agendamentos = await Agendamentos.find({cliente_id: cliente._id.toString()})
+        const agendamentosFuturos = agendamentos.filter((agendamento) => {
+            const diaAgendamento = agendamento.data.split("/")[0]
+            const mesAgendamento = agendamento.data.split("/")[1]
+            const anoAgendamento = agendamento.data.split("/")[2]
+            const dataAgendamento = new Date(anoAgendamento, parseInt(mesAgendamento)-1, diaAgendamento)
+
+            return dataAgendamento.getTime() > new Date().getTime()
+        })
+
+        // Impede o descadastro caso haja pendências
+        if(agendamentosFuturos.length > 0) return res.status(403).send({message: "Impossível descadastrar o cliente enquanto há agendamentos pendentes"})
+
+        // Remove os agendamentos que foram feitos pelo cliente
+        agendamentos.forEach((agendamento) => {
+            Agendamentos.findByIdAndRemove(agendamento._id.toString(), (err) => {
+                if(err) return res.status(500).send({message: "Erro de servidor", error: err})
+            })
+        })
+
+        // Remove o cliente
+        Clientes.findByIdAndRemove(cliente._id.toString(), (err) => {
+            if(err) return res.status(500).send({message: "Erro de servidor", error: err})
+            else return res.status(200).send({message: "Cliente descadastrado com sucesso"})
         })
     }
 }
