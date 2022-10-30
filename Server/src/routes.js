@@ -50,5 +50,12 @@ routes.get('/buscarAgendamentos', AuthTokenAcesso, buscarAgendamentos)
 routes.delete('/cancelarAgendamento/:id', AuthTokenAcesso, cancelarAgendamentoPorId)
 routes.get('/buscarDatasAgendadas/', AuthTokenAcesso, buscarDatasAgendadas)
 
+/**
+ * Endpoints referentes ao controlador de Usuários
+ * (controllers/ControllerUsuarios/index.js)
+ */
+const {authJWT} = require('./controllers/ControllerUsuarios')
+routes.get('/authJWT', AuthTokenAcesso, authJWT)
+
 // * Exportação das rotas para main.js
 module.exports = routes
