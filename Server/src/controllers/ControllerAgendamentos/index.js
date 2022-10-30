@@ -143,7 +143,117 @@ module.exports = {
                 return res.status(200).send({message: "Busca geral feita", agendamentos: objs})
             })
         }
+    },
 
+    /**
+     * @api {delete} /cancelarAgendamento/:id Cancelar Agendamento
+     * @apiName cancelarAgendamentoPorId
+     * @apiGroup Agendamentos
+     * @apiVersion 1.0.0
+     * 
+     * @apiPermission Admins | Clientes
+     * @apiHeader {String} auth Token de acesso JWT
+     * @apiHeaderExample {json} Exemplo de Header:
+     * {
+     *  "auth": [Token de Acesso JWT]
+     * }
+     * @apiParam {String} id ObjectId (_id) do agendamento
+     * 
+     * @apiSuccessExample Sucesso(200):
+     * {
+     *  message: "Agendamento cancelado com sucesso"
+     * }
+     * @apiErrorExample Erro(401):
+     * {
+     *  message: "Para cancelar um agendamento com menos de 2 dias de antecedência, entre em contato com o Salão de Beleza via telefone"
+     * }
+     * @apiErrorExample Erro(404):
+     * {
+     *  message: "Agendamento não encontrado"
+     * }
+     * @apiErrorExample Erro(500):
+     * {
+     *  message: "Erro de Servidor",
+     *  error: {ErrorObject}
+     * }
+     */
+    async cancelarAgendamentoPorId(req, res) {
+        const agendamento_id = req.params.id
+
+        // Busca o Agendamento no BD
+        const agendamento = await Agendamentos.findById(agendamento_id)
+        if(agendamento===null) return res.status(404).send({message: "Agendamento não encontrado"})
         
+        // Formata a data do Agendamento
+        const diaAgendamento = parseInt(agendamento.data.split("/")[0])
+        const mesAgendamento = parseInt(agendamento.data.split("/")[1]) - 1
+        const anoAgendamento = parseInt(agendamento.data.split("/")[2])
+        const dataAgendamento = new Date(anoAgendamento, mesAgendamento, diaAgendamento)
+        
+        // Caso o Agendamento aconteca em menos de 2 dias, não permite seu cancelamento
+        if(dataAgendamento.getTime() - new Date().getTime() < (1000 * 60 * 60 * 24 * 2))
+        return res.status(401).send({
+            message: "Para cancelar um agendamento com menos de 2 dias de antecedência, entre em contato com o Salão de Beleza via telefone"
+        })
+
+        // Caso contrário, cancela o agendamento
+        Agendamentos.findByIdAndRemove(agendamento_id, (err) => {
+            if(err) return res.status(500).send({message: "Erro de servidor", error: err})
+            else return res.status(200).send({message: "Agendamento cancelado com sucesso"})
+        })
+    },
+
+    /**
+     * @api {get} /buscarDatasAgendadas Buscar Datas Agendadas
+     * @apiName buscarDatasAgendadas
+     * @apiGroup Agendamentos
+     * @apiVersion 1.0.0
+     * 
+     * @apiPermission Admins | Clientes
+     * @apiHeader {String} auth Token de acesso JWT
+     * @apiHeaderExample {json} Exemplo de Header:
+     * {
+     *  "auth": [Token de Acesso JWT]
+     * }
+     * 
+     * @apiSuccessExample Sucesso(200):
+     * {
+     *  "DD/MM/YYYY": [HoraInício{NUMBER}, HoraInício{NUMBER}, ...],
+     *  "DD/MM/YYYY": [HoraInício{NUMBER}, HoraInício{NUMBER}, ...],
+     *  ...
+     * }
+     * @apiErrorExample Erro(500):
+     * {
+     *  message: "Erro de Servidor",
+     *  error: {ErrorObject}
+     * }
+     */
+    buscarDatasAgendadas(req, res) {
+
+        Agendamentos.find({}, (err, objs) => {
+            if(err) return res.status(500).send({message: "Erro de servidor", error: err})
+
+            // Objeto que irá armazenar as datas/horários que contem agendamentos
+            let dados = {}
+
+            /**
+             * Loop executado através de todos os agendamentos, gerando um objeto compilando:
+             * {
+             *  "data01": [horáriosOcupados],
+             *  "data02": [horáriosOcupados],
+             *  ...
+             * }
+             */
+            objs.forEach(obj => {
+                // Caso a data não tenha sido incluida como key de {dados}, cria essa key como um array vazio
+                if(dados[obj.data] === undefined) 
+                    dados[obj.data] = []  
+                
+                // Insere o horário de início do agendamento no array da key correspondente a data do agendamento
+                dados[obj.data].push(obj.inicio)
+            })
+
+            return res.status(200).send(dados)
+        })
     }
 }
