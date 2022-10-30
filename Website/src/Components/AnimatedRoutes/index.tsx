@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { Login as LoginAdmin, Menu }from '../../Views/Admin';
+import { Login as LoginAdmin, Menu, Servicos }from '../../Views/Admin';
 import { Login as LoginCliente } from '../../Views/Cliente';
 
 import { AnimatePresence } from 'framer-motion'
@@ -18,6 +18,7 @@ const AnimatedRoutes = () => {
                 <Route path="/" element={<LoginCliente/>}/>
                 <Route path="/admin" element={<LoginAdmin/>}/>
                 <Route path="/admin/menu" element={<Menu/>}/>
+                <Route path="/admin/servicos" element={<Servicos/>}/>
             </Routes>
         </AnimatePresence>
     </Context.Provider>

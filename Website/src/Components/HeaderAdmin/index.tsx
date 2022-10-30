@@ -40,7 +40,7 @@ const HeaderAdmin = () => {
   }
 
   // Ao carregar componente, valida o JWT
-  React.useEffect(validateJWT)
+  React.useEffect(validateJWT, [])
   
   return (
     <header className="components-headeradmin">

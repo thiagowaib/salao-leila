@@ -1,20 +1,18 @@
-import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 import { HeaderAdmin } from '../../../Components'
 
 import './index.scss'
 
 const Menu = () => {
 
+  const navigate = useNavigate()
+
   const handleBtnServicos = () => {
-    // TODO: Navegar para Página de Gerenciamento de Serviços
+    navigate('/admin/servicos')
   }
 
   return (
-    <motion.section 
-    initial={{opacity: 0}}
-    animate={{opacity: 1}}
-    exit={{opacity: 0, transition: {duration:0.2} }}
-    >
+    <>
     <section className="admin-menu">
         <HeaderAdmin/>
 
@@ -30,7 +28,7 @@ const Menu = () => {
         </div>
 
     </section>
-    </motion.section>
+    </>
   )
 }
 

@@ -1,0 +1,167 @@
+@import '../../../SCSS/variables';
+
+.admin-servicos {
+    width: 100vw;
+    padding: 40px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div.voltar {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        position: absolute;
+        top: 120px;
+        width: 100%;
+        justify-content: space-around;
+
+        @media screen and (max-width: $Mobile) {
+            top: 90px;
+        }
+
+        span {
+            font-family: "Barlow", sans-serif;
+            font-size: 1em;
+            color: $Secondary-2;
+            cursor: pointer;
+        }
+        
+        span.hidden{
+            visibility: hidden;
+        }
+    }
+
+    .container-titulo {
+
+        margin: 40px 0 60px 0;
+        display: flex;
+        flex-direction: column;
+
+        h1{
+            font-family: "Crimson Text", serif;
+            font-weight: 400;
+            font-size: 1.5em;
+            color: $Secondary-2;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #A2A2A280;
+        }
+
+        button {
+            background-color: $Main-2;
+            outline: none;
+            border: none;
+            color: white;
+            font-family: "Barlow", sans-serif;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color .2s;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:active {
+                background-color: $Main-1;
+            }
+        }
+    }
+
+    h2 {
+        font-family: "Barlow", sans-serif;
+        width: fit-content;
+        margin: 0 auto 6px auto;
+        border-bottom: 1px solid #A2A2A280;
+        color: $Secondary-2;
+        font-weight: 400;
+        font-size: 1em;
+    }
+
+    .container-servicos {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        @media screen and (max-width: $Mobile) {
+            width: 80%;
+        }
+        .servico {
+            display: flex;
+            flex-direction: column;
+
+            font-family: "Barlow", sans-serif;
+            font-size: 1em;
+
+            margin-bottom: 40px;
+
+            .card {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 10px 20px;
+                border-radius: 5px;
+                background-color: $Main-2;
+                p.nome {
+                    color: $Secondary-6;
+                }
+
+                .container-opcoes {
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+
+                    img {
+                        height: 1em;
+                        cursor: pointer;
+                    }
+    
+                    .opcoes {
+                        display: none;
+                        &.mostrar {
+                            display: flex;
+                            flex-direction: column;
+                            position: absolute;
+
+                            @media screen and (max-width: $Mobile) {
+                                margin-left: -90px;
+                            }
+                        }
+                        button {
+                            color: $Secondary-6;
+                            border: none;
+                            outline: none;
+                            padding: 6px 12px;
+                            font-family: "Barlow", sans-serif;
+                            font-weight: 600;
+                            font-size: 1em;
+                            cursor: pointer;
+                            user-select: none;
+                        }
+
+                        button.modificar {
+                            background-color: rgb(49, 115, 153);
+                            border-radius: 0 4px 0 0;
+                            @media screen and (max-width: $Mobile) {
+                                border-radius: 4px 0 0 0;
+                            }
+                        }
+    
+                        button.excluir {
+                            background-color: $Error;
+                            border-radius: 0 0 4px 4px;
+                        }
+                    }
+                }
+                
+            }
+
+            p.preco {
+                color: $Main-2;
+                margin-left: 20px;
+                margin-top: 4px;
+            }
+        }
+    }
+}
