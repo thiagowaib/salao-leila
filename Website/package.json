@@ -22,7 +22,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "echo $PROJECT_REMIX_CHAIN | grep -E \".+\" && CI=true react-scripts start || react-scripts start",
+    "start": "echo $PROJECT_REMIX_CHAIN | grep -E \".+\" && set PORT=3001 && CI=true react-scripts start || set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
