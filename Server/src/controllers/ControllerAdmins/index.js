@@ -108,7 +108,7 @@ module.exports = {
                     jwtPayload,
                     process.env.JWT_ACCESS_TOKEN_SECRET
                 )
-                return res.status(202).send({message: "Login bem-sucedido", jwt: tokenAcesso})
+                return res.status(200).send({message: "Login bem-sucedido", jwt: tokenAcesso})
             } else {
                 return res.status(401).send({message: "Senha invalida"})
             }
