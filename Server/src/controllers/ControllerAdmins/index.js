@@ -33,7 +33,9 @@ module.exports = {
     novoAdmin(req, res){
         const {usuario, senha} = req.body
 
-        Admins.findOne({usuario}, async(err, obj) => {
+        const queryRegex = new RegExp(`${usuario}$`)
+
+        Admins.findOne({usuario: {$regex: queryRegex, $options: 'g'}}, async(err, obj) => {
             // Validação de erro e duplicata de usuário admin
             if(err) return res.status(500).send({message: "Erro de servidor", error: err})
             if(obj) return res.status(400).send({message: "Usuário admin já existente"})
@@ -90,7 +92,9 @@ module.exports = {
         const {usuario, senha} = req.body
         const {AuthPwd, SetExpDate} = require('../../services')
 
-        Admins.findOne({usuario}, async(err, obj) => {
+        const queryRegex = new RegExp(`${usuario}$`)
+
+        Admins.findOne({usuario: {$regex: queryRegex, $options: 'g'}}, async(err, obj) => {
             // Validação de erro e usuário não encontrado
             if(err) return res.status(500).send({message: "Erro de servidor", error: err})
             if(obj===null) return res.status(404).send({message: "Usuário não encontrado"})
