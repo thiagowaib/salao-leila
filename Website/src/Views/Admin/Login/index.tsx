@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 
 import './index.scss'
 import { useNavigate } from 'react-router-dom';
-const BannerSalao = require('../../../Assets/Images/banner-salao.jpg')
+import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
 
 const Login = () => {
 
@@ -17,7 +17,7 @@ const Login = () => {
   const [usuario, setUsuario] = React.useState("")        //Valor do Input de Usuário
   const [senha, setSenha] = React.useState("")            //Valor do Input de Senha
   const [btnDisable, setBtnDisable] = React.useState(true)//Controla o Disable do botão de "Entrar"
-  const {JWT, setJWT} = React.useContext(Context)
+  const {setJWT} = React.useContext(Context)
 
   // Lida com o campo de input do usuário
   const handleInputUsuario = (e:any) => {
