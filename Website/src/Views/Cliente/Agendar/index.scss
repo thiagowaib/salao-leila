@@ -15,6 +15,10 @@
         width: 60%;
         margin-top: 30px;
 
+        @media screen and (max-width: $Mobile) {
+            width: 90%;
+        }
+
         p.cta-servicos {
             font-family: "Barlow", sans-serif;
             font-weight: 500;
@@ -37,6 +41,9 @@
                 border-radius: 5px;
                 margin-right: 20px;
                 transition: all .2s;
+                @media screen and (max-width: $Mobile) {
+                    padding: 10px 20px;
+                }
 
                 &:hover{
                     background-color: $Main-1;
@@ -52,6 +59,10 @@
                     font-weight: 600;
                     font-size: 1em;
                     color: $Secondary-6;
+                    @media screen and (max-width: $Mobile) {
+                        font-size: .8em;
+                        text-align: center;
+                    }
                 }
             }
         }
@@ -67,6 +78,10 @@
                 color: $Secondary-1;
                 margin-top: 30px;
                 align-self: center;
+
+                @media screen and (max-width: $Mobile) {
+                    font-size: .8em;
+                }
             }
 
             span {
@@ -84,6 +99,10 @@
             padding: 8px;
             border-radius: 5px 5px 0 0;
             margin-top: 5px;
+
+            @media screen and (max-width: $Mobile) {
+                padding: 1px;
+            } 
             button {
                 background-color: rgba(255, 255, 255, .05);
                 padding: 5px 8px;
@@ -103,6 +122,10 @@
                 font-weight: 400;
                 font-size: 1.1em;
                 cursor: pointer;
+
+                @media screen and (max-width: $Mobile) {
+                font-size: .8em;
+                }        
             }
         }
         ul.calendario {
@@ -124,6 +147,11 @@
                     color: $Main-2;
                     font-weight: 600;
                     padding: 2px 2px;
+
+                    @media screen and (max-width: $Mobile) {
+                        font-size: .5em;
+                        font-weight: 700;
+                    }
                 }
 
                 ul {
@@ -145,8 +173,13 @@
                         background-color: $Secondary-6;
                         width: 100%;
                         margin-bottom: 1px;
-
                         transition: all .2s;
+
+                        @media screen and (max-width: $Mobile) {
+                            font-size: .6em;
+                            font-weight: 700;
+                            padding: 12px 0;
+                        }
 
                         &:hover {
                             background-color: $Main-2;

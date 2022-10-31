@@ -1,0 +1,120 @@
+@import '../../SCSS/variables';
+
+.modal-confirmar-cancelamento {
+    display: none;
+
+    &.mostrar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0,0,0,.6);
+    }
+
+    .container-conteudo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        background-color: $Secondary-5;
+        box-shadow: 0 0 6px rgba(0,0,0,.3);
+
+        width: 40%;
+        height: 40%;
+
+        border-radius: 10px;
+
+        @media screen and (max-width: $Mobile) {
+            width: 90%;
+            height: 40%;
+        }
+
+        span.voltar {
+            position: absolute;
+            align-self: flex-end;
+            font-family: "Barlow", sans-serif;
+            font-weight: 500;
+            color: $Secondary-2;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        h1 {
+            font-family: "Crimson Text", serif;
+            font-weight: 600;
+            font-size: 1.5em;
+            width: fit-content;
+            margin: 30px auto;
+            color: $Secondary-2;
+            border-bottom: 1px solid #A2A2A280;
+            @media screen and (max-width: $Mobile) {
+                font-size: 1em;
+                text-align: center;
+            }
+        }
+
+        .container-detalhes {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            width: 80%;
+            margin-bottom: 30px;
+
+            p {
+                font-family: "Barlow", sans-serif;
+                font-weight: 500;
+                color: $Secondary-2;
+                margin-bottom: 8px;
+                span {
+                    color: $Main-2;
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .container-botoes {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+
+            button {
+                background-color: transparent;
+                outline: none;
+                font-family: "Barlow", sans-serif;
+                font-weight: 600;
+                font-size: 1em;
+                padding: 6px 12px;
+                width: 20%;
+                border-radius: 5px;
+                transition: transform .2s;
+
+                &:not([disabled]):hover{
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+
+                @media screen and (max-width: $Mobile) {
+                    width: 40%;
+                }
+            }
+
+            button.voltar {
+                background-color: $Secondary-6;
+                border: 2px solid $Secondary-2;
+                color: $Secondary-2;
+            }
+
+            button.cancelar {
+                background-color: $Error;
+                border: 2px solid $Error;
+                color: $Secondary-6;
+            }
+        }
+    }
+}

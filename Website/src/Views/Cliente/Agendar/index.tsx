@@ -303,6 +303,18 @@ const Agendar = () => {
         getAgendamentosExistentes()
       }}
       closeFun={()=>setAbrirModalConfirmacao(false)}
+      warnFun={(s)=>{
+        toast.warn(s, {
+            position: "top-left",
+            autoClose: 6000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+      }}
       />)
     }
   </>)

@@ -6,6 +6,7 @@ import './index.scss'
 interface props {
     closeFun: () => void,
     agendarFun: (s: string) => void,
+    warnFun: (s: string) => void,
     mostrar: boolean,
     servico_nome: string,
     servico_preco: number,
@@ -39,7 +40,11 @@ const ModalConfirmarAgendamento = (props:props) => {
             props.agendarFun(res.data.message)
         })
         .catch((err) => {
-            console.error(err)
+            if(err.response.status.toString()[0] === "4") {
+                props.warnFun(err.response.data.message)
+            } else {
+                console.error(err)
+            }
         })
     }
     
