@@ -44,7 +44,7 @@ const ModalExcluirServico = (props:props) => {
         <section className="container-conteudo">
 
             <span className="cancelar" onClick={handleBtnCancelar}>x</span>
-            <h1>Modificar dados do Serviço</h1>
+            <h1>Certeza que deseja excluir esse serviço?</h1>
 
             <div className="container-detalhes">
                 <p>Nome atual: <span>{props.nome}</span></p>

@@ -52,6 +52,11 @@
             margin: 30px auto;
             color: $Secondary-2;
             border-bottom: 1px solid #A2A2A280;
+
+            @media screen and (max-width: $Mobile) {
+                font-size: 1.2em;
+                text-align: center;
+            }
         }
 
         .container-detalhes {
