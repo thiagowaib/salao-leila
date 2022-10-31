@@ -27,10 +27,14 @@ const Agendamentos = () => {
 
     const [agendamentos, setAgendamentos] = React.useState<agendamentoProps[]>([])
     const [agendamentoCancelamento, setAgendamentoCancelamento] = React.useState<agendamentoProps>()
+    const [agendamentoData, setAgendamentoData] = React.useState<string>("")
+    const [agendamentoHorario, setAgendamentoHorario] = React.useState<string>("")
     const [abrirModalCancelar, setAbrirModalCancelar] = React.useState<boolean>(false)
 
     const handleBtnCancelar = (agendamento:agendamentoProps) => {
         setAgendamentoCancelamento(agendamento)
+        setAgendamentoData(agendamento.data)
+        setAgendamentoHorario(`${agendamento.inicio.toString().padStart(2, '0')}:00`)
         setAbrirModalCancelar(true)
     }
 
@@ -118,8 +122,8 @@ const Agendamentos = () => {
             id={agendamentoCancelamento?._id}
             servico_nome={agendamentoCancelamento?.servico_nome}
             servico_preco={agendamentoCancelamento?.valor}
-            data={`${agendamentoCancelamento?.data}`}
-            horario={`${agendamentoCancelamento?.inicio.toString().padStart(2,'0')}:00`}
+            data={agendamentoData}
+            horario={agendamentoHorario}
             cancelarFun={(s) => {
                 toast.success(s, {
                     position: "top-left",
