@@ -9,7 +9,7 @@ import './index.scss'
 import { useNavigate } from 'react-router-dom';
 import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
 
-import { Context } from '../../../Components';
+import { Context, ContextCliente } from '../../../Components';
 
 const Login = () => {
 
@@ -20,6 +20,7 @@ const Login = () => {
   const [btnDisable, setBtnDisable] = React.useState(true)//Controla o Disable do botão de "Entrar"
 
   const {setJWT} = React.useContext(Context)
+  const {setClienteEmail} = React.useContext(ContextCliente)
 
   // Lida com o campo de input do usuário
   const handleInputEmail = (e:any) => {
@@ -59,7 +60,8 @@ const Login = () => {
       theme: "colored",
       });
       setJWT(res.data.jwt)
-      setTimeout(() => navigate('/'), 1000)
+      setClienteEmail(email)
+      setTimeout(() => navigate("/agendar"), 1000)
     })
     .catch((err) => {
       switch (err.response.status) {

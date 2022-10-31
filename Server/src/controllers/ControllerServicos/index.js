@@ -67,7 +67,7 @@ module.exports = {
      * @apiGroup Serviços
      * @apiVersion 1.0.0
      * 
-     * @apiPermission Admins
+     * @apiPermission Admins | Clientes
      * @apiHeader {String} auth Token de acesso JWT
      * @apiHeaderExample {json} Exemplo de Header:
      * {
@@ -86,8 +86,6 @@ module.exports = {
      * }
      */
     buscarServicos(req, res) {
-        if(req.payload.belongsTo !== "Admins") return res.status(403).send({message: "Permissão negada [Admins]"})
-
         Servicos.find({}, (err, objs) => {
             // Validação de erro
             if(err) return res.status(500).send({message: "Erro de servidor", error: err})

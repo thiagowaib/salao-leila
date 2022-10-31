@@ -1,0 +1,144 @@
+@import '../../../SCSS/variables';
+
+.cliente-agendar {
+    width: 100vw;
+    padding: 40px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .container-conteudo {
+
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin-top: 30px;
+
+        p.cta-servicos {
+            font-family: "Barlow", sans-serif;
+            font-weight: 500;
+            font-size: 1em;
+            color: $Secondary-2;
+            margin-bottom: 6px;
+        }
+    
+        ul.container-servicos {
+    
+            display: flex;
+            flex-direction: row;
+            .servicos {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+    
+                background-color: $Main-2;
+                padding: 20px 40px;
+                border-radius: 5px;
+                margin-right: 20px;
+                transition: all .2s;
+
+                &:hover{
+                    background-color: $Main-1;
+                    cursor: pointer;
+                }
+
+                &.escolhido{
+                    background-color: $Main-1;
+                }
+
+                p {
+                    font-family: "Barlow", sans-serif;
+                    font-weight: 600;
+                    font-size: 1em;
+                    color: $Secondary-6;
+                }
+            }
+        }
+
+
+        nav.cta-calendario {
+            background-color: #A268ECF0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-radius: 5px 5px 0 0;
+            margin-top: 30px;
+            button {
+                background-color: rgba(255, 255, 255, .05);
+                padding: 5px 8px;
+                border: none;
+                outline: none;
+                border-radius: 100%;
+                transition: background-color .2s;
+                
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgba(255, 255, 255, .2);
+                }
+            }
+            p {
+                color: $Secondary-6;
+                font-family: "Barlow", sans-serif;
+                font-weight: 400;
+                font-size: 1.1em;
+                cursor: pointer;
+            }
+        }
+        ul.calendario {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: transparent;
+
+            li {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                flex: 1;
+                padding: 4px 0;
+                h2 {
+                    font-family: "Barlow", sans-serif;
+                    font-size: 1em;
+                    color: $Main-2;
+                    font-weight: 600;
+                    padding: 2px 2px;
+                }
+
+                ul {
+                    background-color: $Secondary-5;
+                    padding: 4px 2px;
+                    border-left: 1px dashed $Secondary-4;
+                    border-right: 1px dashed $Secondary-4;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    li {
+                        font-family: "Barlow", sans-serif;
+                        font-weight: 500;
+                        font-size: 1em;
+                        color: $Secondary-1;
+                        padding: 8px 0;
+                        border: 1px solid $Secondary-2;
+                        background-color: $Secondary-6;
+                        width: 100%;
+                        margin-bottom: 1px;
+
+                        transition: all .2s;
+
+                        &:hover {
+                            background-color: $Main-2;
+                            color: $Secondary-6;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}

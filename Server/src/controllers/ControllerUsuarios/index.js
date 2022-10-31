@@ -6,7 +6,7 @@ module.exports = {
      * @apiGroup Usuários
      * @apiVersion 1.0.0
      * 
-     * @apiPermission Admin | Apartamentos
+     * @apiPermission Admin | Clientes
      * 
      * @apiHeader {String} auth Token de acesso JWT
      * @apiHeaderExample {json} Exemplo de Header:
