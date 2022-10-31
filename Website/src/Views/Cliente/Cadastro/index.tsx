@@ -59,7 +59,7 @@ const Cadastro = () => {
         setBtnDisable(true)
   }
 
-  // Lida com o click do botão de entrar
+  // Lida com o click do botão de cadastro
   const handleClickCriar = () => {
     axios.post("http://localhost:3000/novoCliente", {
       nome: nome,
@@ -179,7 +179,7 @@ const Cadastro = () => {
           type={"button"}
           onClick={handleClickCriar}
           disabled={btnDisable}
-          >Entrar</button>
+          >Cadastrar</button>
           <p className="cta-login">Já possui cadastro? <span onClick={()=>navigate("/")}>Faça seu Login</span></p>
         </div>
       </section>
