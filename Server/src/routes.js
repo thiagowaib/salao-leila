@@ -46,7 +46,7 @@ routes.delete('/removerServico', AuthTokenAcesso, removerServico)
  */
 const { agendar, buscarAgendamentos, cancelarAgendamentoPorId, buscarDatasAgendadas } = require('./controllers/ControllerAgendamentos')
 routes.post('/agendar', AuthTokenAcesso, agendar)
-routes.get('/buscarAgendamentos', AuthTokenAcesso, buscarAgendamentos)
+routes.post('/buscarAgendamentos', AuthTokenAcesso, buscarAgendamentos)
 routes.delete('/cancelarAgendamento/:id', AuthTokenAcesso, cancelarAgendamentoPorId)
 routes.get('/buscarDatasAgendadas/', AuthTokenAcesso, buscarDatasAgendadas)
 

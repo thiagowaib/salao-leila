@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { HeaderCliente,Context } from '../../../Components'
+import { HeaderCliente,Context,ContextCliente } from '../../../Components'
 import { ToastContainer, toast } from 'react-toastify'
 
 import './index.scss'
@@ -10,6 +10,19 @@ import ModalConfirmarAgendamento from '../../../Components/ModalConfirmarAgendam
 
 const Agendar = () => {
 
+  interface agendamentoProps {
+    _id: string,
+    data: string,
+    inicio: number,
+    valor: number,
+    servico_nome: string,
+    servico_id: string,
+    cliente_nome: string,
+    cliente_id: string,
+    createdAt: string,
+    updatedAt: string,
+    __v: number
+  }
   interface servicoProps {
     _id: string,
     nome: string,
@@ -25,11 +38,14 @@ const Agendar = () => {
   }
 
   const {JWT} = React.useContext(Context)
+  const {clienteEmail} = React.useContext(ContextCliente)
+
   const [servicos, setServicos] = React.useState<servicosProps>()
   const [servicoEscolhido, setServicoEscolhido] = React.useState<servicoProps>()
   const [week, setWeek] = React.useState<Date[]>()
   const [weekCount, setWeekCount] = React.useState(0)
   const [horariosOcupados, setHorariosOcupados] = React.useState<any>(null)
+  const [dataLembrete, setDataLembrete] = React.useState<Date>(new Date())
   let horariosLivres:number[] = [8, 9, 10, 11, 13, 14, 15, 16, 17]
 
   const [abrirModalConfirmacao, setAbrirModalConfirmacao] = React.useState(false)
@@ -120,6 +136,34 @@ const Agendar = () => {
     return horarios
   }
 
+  // Busca um Array de datas onde há agendamentos existentes
+  const getAgendamentosExistentes = () => {
+    axios({
+      method: "post",
+      url: "http://localhost:3000/buscarAgendamentos",
+      headers: {"auth": JWT, "Content-Type": "application/json"},
+      data: {email: clienteEmail}
+    })
+    .then((res) => {
+      console.log(res.data.message)
+      res.data.agendamentos.forEach((agendamento:agendamentoProps) => {
+
+        const dataFormatada = new Date([
+          agendamento.data.split("/")[2].padStart(2, '0'),
+          (parseInt(agendamento.data.split("/")[1])).toString().padStart(2, '0'),
+          agendamento.data.split("/")[0].padStart(2, '0')
+        ].join('/'))
+
+        setDataLembrete(dataFormatada)
+        if(dataFormatada.getTime() >= new Date().getTime() && dataFormatada.getTime() <= new Date().getTime())
+          setDataLembrete(dataFormatada)
+      })
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
+
   const handleClickHorario = (dataFormatada:string, hora:number) => {
     setAbrirModalConfirmacao(true)
     setDataModalConfirmacao(dataFormatada)
@@ -130,8 +174,8 @@ const Agendar = () => {
     getServicos()
     getWeek()
     getHorariosOcupados()
+    getAgendamentosExistentes()
   }, [])
-
   
   return (<>
     <ToastContainer
@@ -169,6 +213,14 @@ const Agendar = () => {
         </ul>
 
         {servicoEscolhido && (<>
+          <span className={dataLembrete.getTime() < new Date().getTime() ? "lembrete-dias" : "lembrete-dias mostrar"}>
+          Bem vind@ de volta! Lembrando que já possui agendamentos em &nbsp;
+          <span>{[
+            dataLembrete.getDate().toString().padStart(2, '0'),
+            (dataLembrete.getMonth() + 1).toString().padStart(2, '0'),
+            dataLembrete.getFullYear().toString(),].join('/')
+          }</span>.
+          </span>
           <nav className='cta-calendario'>
             <button 
             type='button'
@@ -248,6 +300,7 @@ const Agendar = () => {
         });
         getWeek()
         getHorariosOcupados()
+        getAgendamentosExistentes()
       }}
       closeFun={()=>setAbrirModalConfirmacao(false)}
       />)

@@ -81,7 +81,7 @@ module.exports = {
     },
 
     /**
-     * @api {get} /buscarAgendamentos Buscar Agendamentos
+     * @api {post} /buscarAgendamentos Buscar Agendamentos
      * @apiName buscarAgendamentos
      * @apiGroup Agendamentos
      * @apiVersion 1.0.0

@@ -56,6 +56,24 @@
             }
         }
 
+        span.lembrete-dias {
+            display: none;
+            
+            &.mostrar {
+                display: flex;
+                font-family: "Barlow", sans-serif;
+                font-weight: 400;
+                font-size: 1em;
+                color: $Secondary-1;
+                margin-top: 30px;
+                align-self: center;
+            }
+
+            span {
+                color: $Main-2;
+                font-weight: 600;
+            }
+        }
 
         nav.cta-calendario {
             background-color: #A268ECF0;
@@ -65,7 +83,7 @@
             align-items: center;
             padding: 8px;
             border-radius: 5px 5px 0 0;
-            margin-top: 30px;
+            margin-top: 5px;
             button {
                 background-color: rgba(255, 255, 255, .05);
                 padding: 5px 8px;
