@@ -9,9 +9,7 @@
 * <a href="#-tecnologias-em-uso">Tecnologias em Uso</a>
 * <a href="#-funcionalidades-desenvolvidas">Funcionalidades Desenvolvidas</a>
 * <a href="#-inicialização-e-testes">Inicialização e Testes</a>
-* <a href="#-prints-e-gifs">Prints e Gifs</a>
-
-
+* <a href="#-prints">Prints</a>
 <br>
 
 ## 📜 Descrição
@@ -56,13 +54,11 @@ yarn start
 ```
 <strong>Observações</strong>
 <blockquote>É importante que os comandos sejam executados em seus respectivos diretórios, assim como em janelas separadas do CMD/PowerShell/Bash para funcionamento paralelo do servidor e website.</blockquote><blockquote>Após inicializar o servidor, sua documentação está disponível em http://localhost:3000/</blockquote><blockquote>Alguns dados sensíveis do servidor estão visiveis publicamente em .../salao-leila/Server/.dsin.env <strong>APENAS</strong> pela facilidade de inicialização da API pela equipe avaliativa <strong>;D</strong></blockquote>
-
 <br>
 
-## 📸 Prints e Gifs
+## 📸 Prints
 
 <strong>Prints do Website estão disponíveis no repositório através <a href="https://github.com/thiagowaib/salao-leila/tree/main/Prints">desse link</a>.</strong>
-
 <br>
 
 <a href="#desafio-técnico-dsin">⬆️ Voltar ao topo ⬆️</a>
