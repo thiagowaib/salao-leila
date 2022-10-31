@@ -115,6 +115,21 @@
                 font-weight: 500;
             }
         }
+
+        footer {
+            position: absolute;
+            bottom: 40px;
+            font-family: "Barlow", sans-serif;
+            font-weight: 400;
+            font-size: 1em;
+            color: $Secondary-1;
+
+            span {
+                font-weight: 600;
+                color: $Main-2;
+                cursor: pointer;
+            }
+        }
     }
 
     .container-direita {

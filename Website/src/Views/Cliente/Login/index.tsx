@@ -147,6 +147,7 @@ const Login = () => {
           >Entrar</button>
           <p className="cta-login">Primeira vez aqui? <span onClick={()=>navigate("/cadastrar")}>Faça seu cadastro</span></p>
         </div>
+        <footer>Trabalha no Salão? <span onClick={()=>navigate('/admin')}>Acesse o Painel Administrativo</span></footer>
       </section>
       <section className="container-direita">
         <img src={BannerSalao} alt="Salão de Beleza da Leila"/>

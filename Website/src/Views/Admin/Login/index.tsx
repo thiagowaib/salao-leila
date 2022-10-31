@@ -141,6 +141,8 @@ const Login = () => {
           disabled={btnDisable}
           >Entrar</button>
         </div>
+        <footer>É um cliente? <span onClick={()=>navigate('/')}>Acesse o Painel do Cliente</span></footer>
+
       </section>
       <section className="container-direita">
         <img src={BannerSalao} alt="Salão de Beleza da Leila"/>
