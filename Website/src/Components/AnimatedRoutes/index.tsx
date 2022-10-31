@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Login as LoginAdmin, Menu, Servicos }from '../../Views/Admin';
-import { Login as LoginCliente } from '../../Views/Cliente';
+import { Login as LoginCliente, Cadastro } from '../../Views/Cliente';
 
 import { AnimatePresence } from 'framer-motion'
 import Context from '../Context';
@@ -16,6 +16,7 @@ const AnimatedRoutes = () => {
         <AnimatePresence>
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<LoginCliente/>}/>
+                <Route path="/cadastrar" element={<Cadastro/>}/>
                 <Route path="/admin" element={<LoginAdmin/>}/>
                 <Route path="/admin/menu" element={<Menu/>}/>
                 <Route path="/admin/servicos" element={<Servicos/>}/>

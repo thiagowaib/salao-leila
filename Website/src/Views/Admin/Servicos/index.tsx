@@ -81,7 +81,7 @@ const Servicos = () => {
     navigate('/admin/menu')
   }
 
-  React.useEffect(getServicos, [])
+  React.useEffect(getServicos, [JWT])
 
   return (<>
   <ToastContainer

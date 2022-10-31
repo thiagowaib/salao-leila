@@ -12,7 +12,7 @@ module.exports = {
      * 
      * @apiPermission Nenhuma
      * 
-     * @apiBody {String} usuario Nome do cliente
+     * @apiBody {String} nome Nome do cliente
      * @apiBody {String} email Email do cliente
      * @apiBody {String} senha Senha do cliente
      * 
