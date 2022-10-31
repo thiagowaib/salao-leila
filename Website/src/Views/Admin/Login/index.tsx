@@ -9,6 +9,7 @@ import { motion } from "framer-motion"
 import './index.scss'
 import { useNavigate } from 'react-router-dom';
 import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
+import Logo from '../../../Assets/Icons/logo.svg'
 
 const Login = () => {
 
@@ -113,6 +114,7 @@ const Login = () => {
     <section className="admin-login">
       <section className="container-esquerda">
         <header>
+          <img src={Logo} alt="Salão da Leila"/>
           <h1>Login</h1>
           <h2>Painel Administrativo</h2>
         </header>

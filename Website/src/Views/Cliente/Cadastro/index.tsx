@@ -8,6 +8,7 @@ import { motion } from "framer-motion"
 import './index.scss'
 import { useNavigate } from 'react-router-dom';
 import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
+import Logo from '../../../Assets/Icons/logo.svg'
 
 const Cadastro = () => {
 
@@ -135,6 +136,7 @@ const Cadastro = () => {
     <section className="cliente-cadastro">
       <section className="container-esquerda">
         <header>
+          <img src={Logo} alt="Salão da Leila"/>
           <h1>Cliente</h1>
           <h2>Cadastro</h2>
         </header>

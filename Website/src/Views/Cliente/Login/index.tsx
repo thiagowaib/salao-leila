@@ -8,6 +8,7 @@ import { motion } from "framer-motion"
 import './index.scss'
 import { useNavigate } from 'react-router-dom';
 import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
+import Logo from '../../../Assets/Icons/logo.svg'
 
 import { Context, ContextCliente } from '../../../Components';
 
@@ -118,6 +119,7 @@ const Login = () => {
     <section className="cliente-login">
       <section className="container-esquerda">
         <header>
+          <img src={Logo} alt="Salão da Leila"/>
           <h1>Cliente</h1>
           <h2>Login</h2>
         </header>
