@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
-import { HeaderAdmin, Context } from '../../../Components'
+import { HeaderAdmin, Context, ModalCriarServico } from '../../../Components'
+import { ToastContainer, toast } from 'react-toastify'
 
 import './index.scss'
 import MenuBolinhas from '../../../Assets/Icons/menu-bolinhas.svg'
@@ -24,6 +25,9 @@ const Servicos = () => {
 
   const {JWT} = React.useContext(Context)
   const [servicos, setServicos] = React.useState<servicosProps>()
+  const [abrirModalCriar, setAbrirModalCriar] = React.useState(false)
+  const [abrirModalModificar, setAbrirModalModificar] = React.useState(false)
+  const [abrirModalExcluir, setAbrirModalExcluir] = React.useState(false)
   const navigate = useNavigate()
 
   const getServicos = () => {
@@ -54,6 +58,10 @@ const Servicos = () => {
     opcao?.classList.add("mostrar")
   }
 
+  const handleBtnCriar = () => {
+    setAbrirModalCriar(true)
+  }
+
   const handleBtnModificar = (id:string) => {
     // TODO: Inserir função de abrir modal
   }
@@ -69,6 +77,18 @@ const Servicos = () => {
   React.useEffect(getServicos, [])
 
   return (<>
+  <ToastContainer
+    position="top-left"
+    autoClose={2000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="colored"
+    />
     <section className="admin-servicos">
         <HeaderAdmin/>
 
@@ -79,7 +99,7 @@ const Servicos = () => {
 
         <div className="container-titulo">
           <h1>Gerenciamento de Servicos</h1>
-          <button type='button'>
+          <button type='button' onClick={handleBtnCriar}>
             + Novo Serviço
           </button>
         </div>
@@ -106,6 +126,24 @@ const Servicos = () => {
           })
         }
         </ul>
+
+        <ModalCriarServico 
+        mostrar={abrirModalCriar} 
+        closeFun={()=>setAbrirModalCriar(false)}
+        criarFun={(s)=>{
+          toast.success(s, {
+            position: "top-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          getServicos()
+        }}
+        />
 
     </section>
     </>)
