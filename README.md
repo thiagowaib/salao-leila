@@ -9,7 +9,7 @@
 * <a href="#-tecnologias-em-uso">Tecnologias em Uso</a>
 * <a href="#-funcionalidades-desenvolvidas">Funcionalidades Desenvolvidas</a>
 * <a href="#-inicialização-e-testes">Inicialização e Testes</a>
-* <a href="#-prints">Prints</a>
+* <a href="#-prints-e-gifs">Prints e Gifs</a>
 
 
 <br>
@@ -57,9 +57,13 @@ yarn start
 
 <br>
 
-## 📸 Prints
+## 📸 Prints e Gifs
 
 <strong>Prints do Website estão disponíveis no repositório através <a href="https://github.com/thiagowaib/salao-leila/tree/main/Prints">desse link</a>.</strong>
+
+<br>
+
+<a href="#desafio-técnico-dsin">⬆️ Voltar ao topo ⬆️</a>
 
 
 
