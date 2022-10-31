@@ -43,6 +43,7 @@ Desenvolvido durante o processo seletivo da DSIN | Tecnologia da Informação, o
 Servidor Inicializado em **http://localhost:3000/**
 ```bash
 # .../salao-leila/Server/
+yarn install
 yarn start
 ```
 
@@ -50,6 +51,7 @@ yarn start
 Servidor Inicializado em **http://localhost:3001/**
 ```bash
 # .../salao-leila/Website/
+yarn install
 yarn start
 ```
 <strong>Observações</strong>
