@@ -10,7 +10,7 @@ interface props {
     mostrar: boolean,
     servico_nome?: string,
     servico_preco?: number,
-    data?: string,
+    data: string,
     horario: string,
     id?: string,
 }
@@ -53,12 +53,12 @@ const ModalConfirmarCancelamento = (props:props) => {
         <div className="container-detalhes">
             <p>Serviço: <span>{props.servico_nome}</span></p>
             <p>Preço: <span>R${props.servico_preco},00</span></p>
-            <p>Data/Horário: <span>{props.data}</span> as <span>{props.horario}</span></p>
+            <p>Data/Horário: <span>&nbsp;{props.data}&nbsp;</span> as <span>&nbsp;{props.horario}&nbsp;</span></p>
         </div>
 
         <div className="container-botoes">
             <button className="voltar" onClick={handleBtnCancelar}>
-                Cancelar
+                Voltar
             </button>
             <button onClick={cancelarAgendamento} className="cancelar">
                 Cancelar

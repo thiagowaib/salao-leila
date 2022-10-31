@@ -118,7 +118,7 @@ const Agendamentos = () => {
             id={agendamentoCancelamento?._id}
             servico_nome={agendamentoCancelamento?.servico_nome}
             servico_preco={agendamentoCancelamento?.valor}
-            data={agendamentoCancelamento?.data}
+            data={`${agendamentoCancelamento?.data}`}
             horario={`${agendamentoCancelamento?.inicio.toString().padStart(2,'0')}:00`}
             cancelarFun={(s) => {
                 toast.success(s, {

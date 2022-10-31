@@ -214,8 +214,8 @@ const Agendar = () => {
 
         {servicoEscolhido && (<>
           <span className={dataLembrete.getTime() < new Date().getTime() ? "lembrete-dias" : "lembrete-dias mostrar"}>
-          Bem vind@ de volta! Lembrando que já possui agendamentos em &nbsp;
-          <span>{[
+          Bem vind@ de volta! Lembrando que já possui agendamentos em 
+          <span>&nbsp;{[
             dataLembrete.getDate().toString().padStart(2, '0'),
             (dataLembrete.getMonth() + 1).toString().padStart(2, '0'),
             dataLembrete.getFullYear().toString(),].join('/')
