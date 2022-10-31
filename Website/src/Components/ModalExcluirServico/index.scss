@@ -1,6 +1,6 @@
 @import '../../SCSS/variables';
 
-.modal-criar-servico {
+.modal-excluir-servico {
     display: none;
 
     &.mostrar {
@@ -25,13 +25,13 @@
         box-shadow: 0 0 6px rgba(0,0,0,.3);
 
         width: 40%;
-        height: 80%;
+        height: 40%;
 
         border-radius: 10px;
 
         @media screen and (max-width: $Mobile) {
             width: 90%;
-            height: 90%;
+            height: 40%;
         }
 
         span.cancelar {
@@ -54,38 +54,21 @@
             border-bottom: 1px solid #A2A2A280;
         }
 
-        .container-inputs {
-
+        .container-detalhes {
             display: flex;
             flex-direction: column;
-            width: 60%;
             flex: 1;
-            div.input {
-                display: flex;
-                flex-direction: column;
+            width: 80%;
+            margin-bottom: 30px;
 
-                label {
-                    font-family: "Barlow", sans-serif;
-                    font-weight: 400;
-                    font-size: 1em;
-                    color: $Secondary-2;
-                    margin-bottom: 4px;
-                    margin-left: 10px;
-                }
-                
-                input {
-                    font-family: "Barlow", sans-serif;
-                    font-weight: 400;
-                    font-size: 1em;
-                    color: $Secondary-1;
-
-                    background-color: transparent;
-                    border: none;
-                    outline: none;
-                    border-bottom: 1px solid $Secondary-2;
-
-                    padding: 4px 10px;
-                    margin-bottom: 40px;
+            p {
+                font-family: "Barlow", sans-serif;
+                font-weight: 500;
+                color: $Secondary-2;
+                margin-bottom: 8px;
+                span {
+                    color: $Main-1;
+                    font-weight: 700;
                 }
             }
         }
@@ -107,18 +90,13 @@
                 border-radius: 5px;
                 transition: transform .2s;
 
-                @media screen and (max-width: $Mobile) {
-                    width: 40%;
-                }
-                
                 &:not([disabled]):hover{
                     cursor: pointer;
                     transform: scale(1.05);
                 }
 
-                &:disabled {
-                    cursor: not-allowed;
-                    opacity: .6;
+                @media screen and (max-width: $Mobile) {
+                    width: 40%;
                 }
             }
 
@@ -128,9 +106,9 @@
                 color: $Secondary-2;
             }
 
-            button.criar {
-                background-color: $Main-2;
-                border: 2px solid $Main-2;
+            button.excluir {
+                background-color: $Error;
+                border: 2px solid $Error;
                 color: $Secondary-6;
             }
         }

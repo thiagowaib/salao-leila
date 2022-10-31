@@ -46,7 +46,6 @@ const ModalCriarServico = (props:props) => {
     }
 
     const criarServico = () => {
-        console.log("Click")
         axios({
             method: "post",
             url: "http://localhost:3000/novoServico",

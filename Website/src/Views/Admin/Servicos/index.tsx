@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { HeaderAdmin, Context, ModalCriarServico } from '../../../Components'
+import { HeaderAdmin, Context, ModalCriarServico, ModalModificarServico, ModalExcluirServico } from '../../../Components'
 import { ToastContainer, toast } from 'react-toastify'
 
 import './index.scss'
@@ -27,7 +27,10 @@ const Servicos = () => {
   const [servicos, setServicos] = React.useState<servicosProps>()
   const [abrirModalCriar, setAbrirModalCriar] = React.useState(false)
   const [abrirModalModificar, setAbrirModalModificar] = React.useState(false)
+  const [nomeModalServico, setNomeModalServico] = React.useState("")
+  const [precoModalServico, setPrecoModalServico] = React.useState("")
   const [abrirModalExcluir, setAbrirModalExcluir] = React.useState(false)
+
   const navigate = useNavigate()
 
   const getServicos = () => {
@@ -62,12 +65,16 @@ const Servicos = () => {
     setAbrirModalCriar(true)
   }
 
-  const handleBtnModificar = (id:string) => {
-    // TODO: Inserir função de abrir modal
+  const handleBtnModificar = (nome:string, preco:string) => {
+    setNomeModalServico(nome)
+    setPrecoModalServico(preco)
+    setAbrirModalModificar(true)
   }
 
-  const handleBtnExcluir = (id:string) => {
-    // TODO: Inserir função de abrir modal
+  const handleBtnExcluir = (nome:string, preco:string) => {
+    setNomeModalServico(nome)
+    setPrecoModalServico(preco)
+    setAbrirModalExcluir(true)
   }
 
   const handleVoltar = () => {
@@ -115,8 +122,8 @@ const Servicos = () => {
                   <div className="container-opcoes">
                     <img src={MenuBolinhas} alt="Opções" onClick={() => handleBtnOpcoes(index)}/>
                     <div id={`opcoes-${index}`} className="opcoes">
-                      <button className="modificar" onClick={() => handleBtnModificar(servico._id)}>Modificar</button>
-                      <button className="excluir" onClick={() => handleBtnExcluir(servico._id)}>Excluir</button>
+                      <button className="modificar" onClick={() => handleBtnModificar(servico.nome, servico.preco.toString())}>Modificar</button>
+                      <button className="excluir" onClick={() => handleBtnExcluir(servico.nome, servico.preco.toString())}>Excluir</button>
                     </div>
                   </div>
                 </div>
@@ -131,6 +138,46 @@ const Servicos = () => {
         mostrar={abrirModalCriar} 
         closeFun={()=>setAbrirModalCriar(false)}
         criarFun={(s)=>{
+          toast.success(s, {
+            position: "top-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          getServicos()
+        }}
+        />
+
+        <ModalModificarServico 
+        mostrar={abrirModalModificar}
+        nome={nomeModalServico}
+        preco={precoModalServico}
+        closeFun={()=>setAbrirModalModificar(false)}
+        modificarFun={(s)=>{
+          toast.success(s, {
+            position: "top-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          getServicos()
+        }}
+        />
+
+        <ModalExcluirServico 
+        mostrar={abrirModalExcluir}
+        nome={nomeModalServico}
+        preco={precoModalServico}
+        closeFun={()=>setAbrirModalExcluir(false)}
+        modificarFun={(s)=>{
           toast.success(s, {
             position: "top-left",
             autoClose: 2000,
