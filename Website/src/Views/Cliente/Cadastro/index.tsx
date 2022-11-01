@@ -1,18 +1,20 @@
-import axios from 'axios'
+// * Importações
 import React from 'react'
-
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
 import { motion } from "framer-motion"
 
 import './index.scss'
-import { useNavigate } from 'react-router-dom';
 import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
 import Logo from '../../../Assets/Icons/logo.svg'
 
+/**
+ * Tela de Cadastro de novos clientes
+ */
 const Cadastro = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate()  //Objeto de Navegação
 
   const [nome, setNome] = React.useState("")              //Valor do Input de Nome
   const [email, setEmail] = React.useState("")            //Valor do Input de Email

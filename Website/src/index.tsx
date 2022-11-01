@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AnimatedRoutes } from './Components';
 
 import './reset.scss'
+import 'react-toastify/dist/ReactToastify.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

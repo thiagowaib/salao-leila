@@ -1,27 +1,28 @@
-import axios from 'axios'
+// * Importações
 import React from 'react'
-
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { Context, ContextCliente } from '../../../Components';
 import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
 import { motion } from "framer-motion"
 
 import './index.scss'
-import { useNavigate } from 'react-router-dom';
 import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
 import Logo from '../../../Assets/Icons/logo.svg'
 
-import { Context, ContextCliente } from '../../../Components';
-
+/**
+ * Tela de Login do Painel do Cliente
+ */
 const Login = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate()  // Objeto de Navegação
 
   const [email, setEmail] = React.useState("")            //Valor do Input de Email
   const [senha, setSenha] = React.useState("")            //Valor do Input de Senha
   const [btnDisable, setBtnDisable] = React.useState(true)//Controla o Disable do botão de "Entrar"
 
-  const {setJWT} = React.useContext(Context)
-  const {setClienteEmail} = React.useContext(ContextCliente)
+  const {setClienteEmail} = React.useContext(ContextCliente)//Atribuidor do Email do Cliente, provido pelo React Context
+  const {setJWT} = React.useContext(Context)                //Atribuidor de JWT, provido pelo React Context
 
   // Lida com o campo de input do usuário
   const handleInputEmail = (e:any) => {

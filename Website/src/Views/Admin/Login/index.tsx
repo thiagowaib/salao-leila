@@ -1,24 +1,28 @@
-import axios from 'axios'
+// * Importações
 import React from 'react'
+import axios from 'axios'
 import { Context } from '../../../Components';
-
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
 import { motion } from "framer-motion"
 
+
 import './index.scss'
-import { useNavigate } from 'react-router-dom';
 import BannerSalao from '../../../Assets/Images/banner-salao.jpg';
 import Logo from '../../../Assets/Icons/logo.svg'
 
+/**
+ * Tela de Login do Painel Admin
+ */
 const Login = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate()  // Objeto de Navegação
+
+  const {setJWT} = React.useContext(Context)              //Atribuidor de JWT, provido pelo React Context
 
   const [usuario, setUsuario] = React.useState("")        //Valor do Input de Usuário
   const [senha, setSenha] = React.useState("")            //Valor do Input de Senha
   const [btnDisable, setBtnDisable] = React.useState(true)//Controla o Disable do botão de "Entrar"
-  const {setJWT} = React.useContext(Context)
 
   // Lida com o campo de input do usuário
   const handleInputUsuario = (e:any) => {

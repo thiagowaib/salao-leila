@@ -1,12 +1,17 @@
+// * Importações
 import { useNavigate } from "react-router-dom"
 import { HeaderAdmin } from '../../../Components'
 
 import './index.scss'
 
+/**
+ * Menu de Opções do Painel Administrativo
+ */
 const Menu = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate()  // Objeto de Navegação
 
+  // Lida com a navegação do menu
   const handleBtnServicos = () => {
     navigate('/admin/servicos')
   }

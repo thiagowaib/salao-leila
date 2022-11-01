@@ -1,3 +1,9 @@
+/**
+ * Definição de um React Context para
+ * armazenar e propagar o email do cliente
+ * resultado do Login
+ */
+
 import React from 'react'
 
 interface ContextProps {

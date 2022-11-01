@@ -1,3 +1,8 @@
+/**
+ * Definição de um React Context para
+ * armazenar e propagar o JWT resultado do Login
+ */
+
 import React from 'react'
 
 interface ContextProps {

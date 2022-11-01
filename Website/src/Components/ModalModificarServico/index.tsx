@@ -1,25 +1,31 @@
-import axios from 'axios'
+// * Importações
 import React from 'react'
+import axios from 'axios'
 import {Context} from '..'
 
 import './index.scss'
 
+// Tipagem das propriedades do componente
 interface props {
-    closeFun: () => void,
-    modificarFun: (s: string) => void,
+    closeFun: () => void,               //Função executada ao fechar o Modal
+    modificarFun: (s: string) => void,  //Função executada ao criar Serviço
     mostrar: boolean,
     nome: string,
     preco: string
 }
 
+/**
+ * Modal de Modificação de Serviços
+ */
 const ModalModificarServico = (props:props) => {
 
-    const [nome, setNome] = React.useState(props.nome)
-    const [preco, setPreco] = React.useState(props.preco)
-    const [modificarDisable, setModificarDisable] = React.useState(true)
+    const {JWT} = React.useContext(Context) //JWT resultado do React Context
 
-    const {JWT} = React.useContext(Context)
+    const [nome, setNome] = React.useState(props.nome)                  //Nome do Serviço
+    const [preco, setPreco] = React.useState(props.preco)               //Preço do Serviço
+    const [modificarDisable, setModificarDisable] = React.useState(true)//Disable do Botão de Modificar
 
+    // Lida com o Input do Nome
     const handleInputNome = (e:any) => {
         setNome(e.target.value)
         if(nome === "" || preco === "" || parseInt(preco) < 0)
@@ -28,6 +34,7 @@ const ModalModificarServico = (props:props) => {
             setModificarDisable(false)
     }
 
+    // Lida com o Input do Preço
     const handleInputPreco = (e:any) => {
         setPreco(e.target.value)
         if(nome === "" || preco === "" || parseInt(preco) < 0)
@@ -36,17 +43,20 @@ const ModalModificarServico = (props:props) => {
             setModificarDisable(false)
     }
 
+    // Realiza o reset dos inputs ao seu estado original
     const resetInputs = () => {
         setNome("")
         setPreco("")
         setModificarDisable(true)
     }
 
+    // Lida com o fechamento do modal
     const handleBtnCancelar = () => {
         resetInputs()
         props.closeFun()
     }
-
+    
+    // Realiza a modificação do serviço
     const modificarServico = () => {
         axios({
             method: "put",

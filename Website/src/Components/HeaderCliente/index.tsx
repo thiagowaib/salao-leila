@@ -1,19 +1,25 @@
+// * Importações
 import React from 'react'
-import './index.scss'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import Context from '../Context'
 
+import './index.scss'
 import LogoutSVG from '../../Assets/Icons/logout.svg'
 
-import Context from '../Context'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
+// Tipagem das propriedades do componente
 interface props {
     atual: "Agendar"|"Agendamentos"
 }
+
+/**
+ * Componente do Cabeçalho do Painel do Cliente
+ */
 const HeaderCliente = (props:props) => {
 
-    const {JWT, setJWT} = React.useContext(Context)
-    const navigate = useNavigate()
+    const navigate = useNavigate()                      // Objeto de Navegação
+    const {JWT, setJWT} = React.useContext(Context)     // JWT Resultado do React Context
 
     // Lida com a função de logout
     const handleBtnLogout = () => {
@@ -40,6 +46,7 @@ const HeaderCliente = (props:props) => {
         })
     }
 
+    // Ao carregar o elemento, valida o JWT do usuário
     React.useEffect(validateJWT, [JWT, navigate])
 
 

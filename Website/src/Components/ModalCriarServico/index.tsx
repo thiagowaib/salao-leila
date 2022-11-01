@@ -1,23 +1,29 @@
-import axios from 'axios'
+// * Importações
 import React from 'react'
+import axios from 'axios'
 import {Context} from '../'
 
 import './index.scss'
 
+// Tipagem das propriedades do componente
 interface props {
-    closeFun: () => void,
-    criarFun: (s: string) => void,
+    closeFun: () => void,           //Função executada ao fechar o Modal
+    criarFun: (s: string) => void,  //Função executada ao criar Serviço
     mostrar: boolean
 }
 
+/**
+ * Modal de Criação de Serviços
+ */
 const ModalCriarServico = (props:props) => {
+    
+    const {JWT} = React.useContext(Context)     //JWT resultado do React Context
 
-    const [nome, setNome] = React.useState("")
-    const [preco, setPreco] = React.useState("")
-    const [criarDisable, setCriarDisable] = React.useState(true)
+    const [nome, setNome] = React.useState("")                  //Nome do Serviço
+    const [preco, setPreco] = React.useState("")                //Preço do Serviço
+    const [criarDisable, setCriarDisable] = React.useState(true)//Disable do Botão de Criar
 
-    const {JWT} = React.useContext(Context)
-
+    // Lida com o Input do Nome
     const handleInputNome = (e:any) => {
         setNome(e.target.value)
         if(nome === "" || preco === "" || parseInt(preco) < 0)
@@ -26,6 +32,7 @@ const ModalCriarServico = (props:props) => {
             setCriarDisable(false)
     }
 
+    // Lida com o Input do Preço
     const handleInputPreco = (e:any) => {
         setPreco(e.target.value)
         if(nome === "" || preco === "" || parseInt(preco) < 0)
@@ -34,17 +41,20 @@ const ModalCriarServico = (props:props) => {
             setCriarDisable(false)
     }
 
+    // Realiza o reset dos inputs ao seu estado original
     const resetInputs = () => {
         setNome("")
         setPreco("")
         setCriarDisable(true)
     }
 
+    // Lida com o fechamento do modal
     const handleBtnCancelar = () => {
         resetInputs()
         props.closeFun()
     }
 
+    // Realiza a criação do serviço
     const criarServico = () => {
         axios({
             method: "post",

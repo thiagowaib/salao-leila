@@ -54,10 +54,12 @@ yarn start
 ```
 <br>
 <strong>Login Administrativo de Teste</strong>
+
 • Usuário: **`Leila`**
 • Senha: **`senha123`**
 
 <strong>Login Cliente de Teste</strong>
+
 • Email: **`fulano@email.com`**
 • Senha: **`senha`**
 <br>

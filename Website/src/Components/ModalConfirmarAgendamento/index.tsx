@@ -1,12 +1,15 @@
+// * Importações
 import React from 'react'
-import {Context, ContextCliente} from '..'
 import axios from 'axios'
+import {Context, ContextCliente} from '..'
+
 import './index.scss'
 
+// Tipagem das propriedades do componente
 interface props {
-    closeFun: () => void,
-    agendarFun: (s: string) => void,
-    warnFun: (s: string) => void,
+    closeFun: () => void,               //Função executada ao fechar o Modal
+    agendarFun: (s: string) => void,    //Função executada ao agendar
+    warnFun: (s: string) => void,       //Função executada ao ocorrer um erro 4xx
     mostrar: boolean,
     servico_nome: string,
     servico_preco: number,
@@ -14,14 +17,21 @@ interface props {
     horario: string
 }
 
+
+/**
+ * Modal de Confirmação dos Agendamentos
+ */
 const ModalConfirmarAgendamento = (props:props) => {
 
-    const {JWT} = React.useContext(Context)
-    const {clienteEmail} = React.useContext(ContextCliente)
+    const {JWT} = React.useContext(Context)                 //JWT resultado do React Context
+    const {clienteEmail} = React.useContext(ContextCliente) //Email resultado do React Context
+
+    // Lida com o fechamento do modal
     const handleBtnCancelar = () => {
         props.closeFun()
     }
 
+    // Lida com o agendamento
     const agendarHorario = () => {
         axios({
             method: "post",

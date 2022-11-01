@@ -1,18 +1,21 @@
+// * Importações
 import React from 'react'
-import './index.scss'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import Context from '../Context'
 
+import './index.scss'
 import LogoSVG from '../../Assets/Icons/logo.svg'
 import LogoutSVG from '../../Assets/Icons/logout.svg'
 
-import Context from '../Context'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
-
+/**
+ * Componente do Cabeçalho do Painel Administrativo
+ */
 const HeaderAdmin = () => {
 
-  const {JWT, setJWT} = React.useContext(Context)
-  const navigate = useNavigate()
+  const navigate = useNavigate()                  // Objeto de Navegação
+  const {JWT, setJWT} = React.useContext(Context) // JWT Resultado do React Context
 
   // Lida com a função de logout do painel adminstrativo
   const handleBtnLogout = () => {
@@ -39,7 +42,7 @@ const HeaderAdmin = () => {
     })
   }
 
-  // Ao carregar componente, valida o JWT
+  // Ao carregar o elemento, valida o JWT do usuário
   React.useEffect(validateJWT, [JWT, navigate])
   
   return (

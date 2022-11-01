@@ -1,18 +1,24 @@
+// * Importações
 import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion'
+
+// * Componentes
 import { Login as LoginAdmin, Menu, Servicos }from '../../Views/Admin';
 import { Login as LoginCliente, Cadastro, Agendar, Agendamentos } from '../../Views/Cliente';
 
-import { AnimatePresence } from 'framer-motion'
+// * Importação dos Contextos
 import Context from '../Context';
 import ContextCliente from '../ContextCliente';
 
 const AnimatedRoutes = () => {
     const location = useLocation()
 
+    // Definição de Contextos
     const [JWT, setJWT] = React.useState("")
     const [clienteEmail, setClienteEmail] = React.useState("")
 
+    // Roteamento de Views
     return (
     <Context.Provider value={{JWT, setJWT}}>
         <ContextCliente.Provider value={{clienteEmail, setClienteEmail}}>

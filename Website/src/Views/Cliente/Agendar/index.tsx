@@ -1,15 +1,20 @@
-import axios from 'axios'
+// * Importações
 import React from 'react'
-import { HeaderCliente,Context,ContextCliente } from '../../../Components'
+import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import { HeaderCliente,Context,ContextCliente, ModalConfirmarAgendamento } from '../../../Components'
 
 import './index.scss'
 import ChevronRight from '../../../Assets/Icons/chevron-right.svg'
 import ChevronLeft from '../../../Assets/Icons/chevron-left.svg'
-import ModalConfirmarAgendamento from '../../../Components/ModalConfirmarAgendamento'
 
+/**
+ * Tela para realizar agendamentos
+ * no painel do cliente
+ */
 const Agendar = () => {
 
+  // Tipagem do objeto {Agendamento}
   interface agendamentoProps {
     _id: string,
     data: string,
@@ -23,6 +28,7 @@ const Agendar = () => {
     updatedAt: string,
     __v: number
   }
+  // Tipagem do objeto {Serviço}
   interface servicoProps {
     _id: string,
     nome: string,
@@ -32,25 +38,27 @@ const Agendar = () => {
     __v: number
   }
 
+  // Tipagem do array de objetos {Serviço}[]
   interface servicosProps {
     [x: string]: any
     servicos: servicoProps[]
   }
 
-  const {JWT} = React.useContext(Context)
-  const {clienteEmail} = React.useContext(ContextCliente)
+  const {JWT} = React.useContext(Context)                 // JWT resultado do Login
+  const {clienteEmail} = React.useContext(ContextCliente) // Email do cliente, resultado do Login
 
-  const [servicos, setServicos] = React.useState<servicosProps>()
-  const [servicoEscolhido, setServicoEscolhido] = React.useState<servicoProps>()
-  const [week, setWeek] = React.useState<Date[]>()
-  const [weekCount, setWeekCount] = React.useState(0)
-  const [horariosOcupados, setHorariosOcupados] = React.useState<any>(null)
-  const [dataLembrete, setDataLembrete] = React.useState<Date>(new Date())
-  let horariosLivres:number[] = [8, 9, 10, 11, 13, 14, 15, 16, 17]
+  const [servicos, setServicos] = React.useState<servicosProps>()               //Array de objetos {Serviço}
+  const [servicoEscolhido, setServicoEscolhido] = React.useState<servicoProps>()//Objeto do {Serviço} escolhido
+  const [week, setWeek] = React.useState<Date[]>()                              //Array de [Dates] da semana
+  const [weekCount, setWeekCount] = React.useState(0)                           //Número da semana buscada (relativo a semana atual: 0)
+  const [horariosOcupados, setHorariosOcupados] = React.useState<any>(null)     //Objeto de dias/horarios ocupados
+  const [dataLembrete, setDataLembrete] = React.useState<Date>(new Date())      //Data do agendamento a ser mostrada no lembrete
+  
+  const [abrirModalConfirmacao, setAbrirModalConfirmacao] = React.useState(false) //Controla o display do modal de Confirmação
+  const [dataModalConfirmacao, setDataModalConfirmacao] = React.useState("")      //Data utilizada no modal de Confirmação
+  const [horarioModalConfirmacao, setHorarioModalConfirmacao] = React.useState("")//Horário utilizado no modal de Confirmação
 
-  const [abrirModalConfirmacao, setAbrirModalConfirmacao] = React.useState(false)
-  const [dataModalConfirmacao, setDataModalConfirmacao] = React.useState("")
-  const [horarioModalConfirmacao, setHorarioModalConfirmacao] = React.useState("")
+  let horariosLivres:number[] = [8, 9, 10, 11, 13, 14, 15, 16, 17]              //Array contendo todos os horários possíveis
 
   // Lida com a escolha de serviço
   const handleEscolhaServico = (index:number, servico:servicoProps) => {
@@ -92,6 +100,7 @@ const Agendar = () => {
     setWeek(weekArr)
   }
 
+  // Busca os horários ocupados
   const getHorariosOcupados = () => {
     axios({
       method: "get",
@@ -123,6 +132,7 @@ const Agendar = () => {
     })
   }
 
+  // Lista os horários disponíveis
   const listHorarios = (dataFormatada:string, ) => {
     let horarios:number[]
     if(horariosOcupados[`${dataFormatada}`] !== undefined)
@@ -136,7 +146,7 @@ const Agendar = () => {
     return horarios
   }
 
-  // Busca um Array de datas onde há agendamentos existentes
+  // Busca um Array de datas onde há agendamentos já feitos pelo cliente
   const getAgendamentosExistentes = () => {
     axios({
       method: "post",
@@ -164,12 +174,20 @@ const Agendar = () => {
     })
   }
 
+  // Lida com o click no horário durante o processo de agendamento
   const handleClickHorario = (dataFormatada:string, hora:number) => {
     setAbrirModalConfirmacao(true)
     setDataModalConfirmacao(dataFormatada)
     setHorarioModalConfirmacao(`${hora.toString().padStart(2,'0')}:00`)
   }
 
+  /**
+   * Ao carregar a View, executa
+   * a busca dos serviços cadastrados;
+   * a semana atual;
+   * os horários ocupados,
+   * os agendamentos já realizados pelo cliente.
+   */
   React.useEffect(() => {
     getServicos()
     getWeek()
@@ -194,6 +212,7 @@ const Agendar = () => {
       <HeaderCliente atual="Agendar"/>
       <div className="container-conteudo">
 
+        {/* Seleção de Serviços */}
         <p className="cta-servicos">Escolha um serviço:</p>
         <ul className="container-servicos">
         {
@@ -212,7 +231,10 @@ const Agendar = () => {
         }
         </ul>
 
+        {/* Display do Calendário de Agendamento */}
         {servicoEscolhido && (<>
+
+          {/* Lembrete de que já existe um agendamento feito pelo cliente */}
           <span className={dataLembrete.getTime() < new Date().getTime() ? "lembrete-dias" : "lembrete-dias mostrar"}>
           Bem vind@ de volta! Lembrando que já possui agendamentos em 
           <span>&nbsp;{[
@@ -221,6 +243,8 @@ const Agendar = () => {
             dataLembrete.getFullYear().toString(),].join('/')
           }</span>.
           </span>
+
+          {/* Chamada do Calendário */}
           <nav className='cta-calendario'>
             <button 
             type='button'
@@ -244,6 +268,8 @@ const Agendar = () => {
               <img src={ChevronRight} alt="Próximo"/>
             </button>
           </nav>
+
+          {/* Calendário de Dias/Horários */}
           <ul className="calendario">
             {week && week.map((day, index) => {
 
@@ -279,6 +305,7 @@ const Agendar = () => {
       </div>
     </section>
 
+    {/* Instanciação do modal de confirmação do agendamento */}
     {
       servicoEscolhido && (
       <ModalConfirmarAgendamento

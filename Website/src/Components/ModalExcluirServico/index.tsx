@@ -1,24 +1,32 @@
-import axios from 'axios'
+// * Importações
 import React from 'react'
+import axios from 'axios'
 import {Context} from '..'
 
 import './index.scss'
 
+// Tipagem das propriedades do componente
 interface props {
-    closeFun: () => void,
-    modificarFun: (s: string) => void,
+    closeFun: () => void,                //Função executada ao fechar o Modal
+    excluirFun: (s: string) => void,    //Função executada ao excluir Serviço
     mostrar: boolean,
     nome: string,
     preco: string
 }
 
+/**
+ * Modal de Exclusão de Serviços
+ */
 const ModalExcluirServico = (props:props) => {
 
-    const {JWT} = React.useContext(Context)
+    const {JWT} = React.useContext(Context) //JWT resultado do React Context
+
+    // Lida com o fechamento do modal
     const handleBtnCancelar = () => {
         props.closeFun()
     }
 
+    // Realiza a exclusão do serviço
     const excluirServico = () => {
         axios({
             method: "delete",
@@ -31,7 +39,7 @@ const ModalExcluirServico = (props:props) => {
         .then((res) => {
             console.log(res.data.message)
             props.closeFun()
-            props.modificarFun(res.data.message)
+            props.excluirFun(res.data.message)
         })
         .catch((err) => {
             console.error(err)

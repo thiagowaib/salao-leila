@@ -1,12 +1,15 @@
+// * Importações
 import React from 'react'
-import {Context} from '..'
 import axios from 'axios'
+import {Context} from '..'
+
 import './index.scss'
 
+// Tipagem das propriedades do componente
 interface props {
-    closeFun: () => void,
-    warnFun: (s: string) => void,
-    cancelarFun: (s: string) => void,
+    closeFun: () => void,               //Função executada ao fechar o Modal
+    warnFun: (s: string) => void,       //Função executada ao ocorrer um erro 4xx
+    cancelarFun: (s: string) => void,   //Função executada ao cancelar
     mostrar: boolean,
     servico_nome?: string,
     servico_preco?: number,
@@ -15,13 +18,19 @@ interface props {
     id?: string,
 }
 
+/**
+ * Modal de Confirmação do Cancelamento de Agendamentos
+ */
 const ModalConfirmarCancelamento = (props:props) => {
 
-    const {JWT} = React.useContext(Context)
+    const {JWT} = React.useContext(Context) //JWT resultado do React Context
+
+    // Lida com o fechamento do modal
     const handleBtnCancelar = () => {
         props.closeFun()
     }
 
+    // Lida com o cancelamento do agendamento
     const cancelarAgendamento = () => {
         axios({
             method: "delete",

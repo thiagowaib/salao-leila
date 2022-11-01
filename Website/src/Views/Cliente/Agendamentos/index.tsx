@@ -1,13 +1,19 @@
+// * Importações
 import React from 'react'
-import { Context, ContextCliente, HeaderCliente, ModalConfirmarCancelamento } from '../../../Components'
-import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import { Context, ContextCliente, HeaderCliente, ModalConfirmarCancelamento } from '../../../Components'
 
 import './index.scss'
 import MenuBolinhas from '../../../Assets/Icons/menu-bolinhas.svg'
 
+/**
+ * Tela de "Meus Agendamentos"
+ * do painel do cliente
+ */
 const Agendamentos = () => {
 
+    // Tipagem do objeto {agendamento}
     interface agendamentoProps {
         _id: string,
         data: string,
@@ -22,15 +28,16 @@ const Agendamentos = () => {
         __v: number
     }
 
-    const {clienteEmail} = React.useContext(ContextCliente)
-    const {JWT} = React.useContext(Context)
+    const {JWT} = React.useContext(Context)                 // JWT resultado do Login
+    const {clienteEmail} = React.useContext(ContextCliente) // Email do cliente, resultado do Login
 
-    const [agendamentos, setAgendamentos] = React.useState<agendamentoProps[]>([])
-    const [agendamentoCancelamento, setAgendamentoCancelamento] = React.useState<agendamentoProps>()
-    const [agendamentoData, setAgendamentoData] = React.useState<string>("")
-    const [agendamentoHorario, setAgendamentoHorario] = React.useState<string>("")
-    const [abrirModalCancelar, setAbrirModalCancelar] = React.useState<boolean>(false)
+    const [agendamentos, setAgendamentos] = React.useState<agendamentoProps[]>([])                  //Array de objetos {Agendamento}
+    const [abrirModalCancelar, setAbrirModalCancelar] = React.useState<boolean>(false)              //Controla o display do modal de cancelamento
+    const [agendamentoCancelamento, setAgendamentoCancelamento] = React.useState<agendamentoProps>()//Objeto {Agendamento} para uso no modal de cancelamento
+    const [agendamentoData, setAgendamentoData] = React.useState<string>("")                        //Data do objeto de Agendamento para uso no modal de cancelamento
+    const [agendamentoHorario, setAgendamentoHorario] = React.useState<string>("")                  //Horário do objeto de Agendamento para uso no modal de cancelamento
 
+    // Lida com o botão para abrir o modal de cancelamento
     const handleBtnCancelar = (agendamento:agendamentoProps) => {
         setAgendamentoCancelamento(agendamento)
         setAgendamentoData(agendamento.data)
@@ -38,18 +45,20 @@ const Agendamentos = () => {
         setAbrirModalCancelar(true)
     }
 
+    // Lida com o Exibir/Esconder dos botões "Cancelar"
     const handleBtnOpcoes = (key: number) => {
         const opcoes_all = document.getElementsByClassName("opcoes")
         const opcao = document.getElementById(`opcoes-${key}`)
         if(opcao?.classList.contains("mostrar")) {
-          opcao.classList.remove("mostrar")
-          return;
+            opcao.classList.remove("mostrar")
+            return;
         }
         for(let i = 0; i<opcoes_all.length; i++)
-          opcoes_all[i].classList.remove("mostrar")
+            opcoes_all[i].classList.remove("mostrar")
         opcao?.classList.add("mostrar")
-      }
+    }
 
+    // Realiza a busca dos agendamentos do cliente
     const getAgendamentos = () => {
         axios({
             method: "post",
@@ -75,6 +84,7 @@ const Agendamentos = () => {
         })
     }
 
+    // Ao carregar a view, executa a busca de agendamentos
     React.useEffect(getAgendamentos, [])
 
     return (
@@ -94,6 +104,8 @@ const Agendamentos = () => {
         <HeaderCliente atual="Agendamentos"/>
         <div className="container-conteudo">
             <h1 className="titulo">Meus Agendamentos</h1>
+
+            {/* Lista de Agendamentos */}
             <ul className="container-agendamentos">
                 {agendamentos && agendamentos.map((agendamento, index) => {
                     return (<>
@@ -117,6 +129,8 @@ const Agendamentos = () => {
             </ul>
             <footer>Telefone de Contato: <span>(14) 98214-1243</span></footer>
         </div>
+
+        {/* Instanciação do modal de cancelamento */}
         <ModalConfirmarCancelamento
             mostrar={abrirModalCancelar}
             id={agendamentoCancelamento?._id}
