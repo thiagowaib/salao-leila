@@ -52,6 +52,16 @@ Servidor Inicializado em **http://localhost:3001/**
 yarn install
 yarn start
 ```
+<br>
+<strong>Login Administrativo de Teste</strong>
+• Usuário: **`Leila`**
+• Senha: **`senha123`**
+
+<strong>Login Cliente de Teste</strong>
+• Email: **`fulano@email.com`**
+• Senha: **`senha`**
+<br>
+
 <strong>Observações</strong>
 <blockquote>É importante que os comandos sejam executados em seus respectivos diretórios, assim como em janelas separadas do CMD/PowerShell/Bash para funcionamento paralelo do servidor e website.</blockquote><blockquote>Após inicializar o servidor, sua documentação está disponível em http://localhost:3000/</blockquote><blockquote>Alguns dados sensíveis do servidor estão visiveis publicamente em .../salao-leila/Server/.dsin.env <strong>APENAS</strong> pela facilidade de inicialização da API pela equipe avaliativa <strong>;D</strong></blockquote>
 <br>
