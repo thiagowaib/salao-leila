@@ -55,12 +55,12 @@ yarn start
 <br>
 <strong>Login Administrativo de Teste</strong>
 
-• Usuário: **`Leila`**
+• Usuário: **`Leila`** <br>
 • Senha: **`senha123`**
 
 <strong>Login Cliente de Teste</strong>
 
-• Email: **`fulano@email.com`**
+• Email: **`fulano@email.com`** <br>
 • Senha: **`senha`**
 <br>
 
