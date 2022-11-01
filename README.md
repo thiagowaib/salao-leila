@@ -14,6 +14,7 @@
 
 ## 📜 Descrição
 Desenvolvido durante o processo seletivo da DSIN | Tecnologia da Informação, o Sistema do Salão de Beleza da Leia foi desenvolvido com o objetivo de oferecer uma plataforma web onde os clientes do salão pudessem gerenciar e realizar seus agendamentos no salão - assim como a própria Leia pudesse, através de um painel administrativo, gerenciar os serviços ofertados pelo salão.
+
 <br>
 
 ## 📲 Tecnologias em Uso
@@ -24,6 +25,7 @@ Desenvolvido durante o processo seletivo da DSIN | Tecnologia da Informação, o
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="35px"> • **ReactJs** - Framework Javascript utilizado para desenvolver o Website
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="35px"> • **Typescript** - Superset do Javascript utilizado em conjunto com ReactJs no Website
+
 <br>
 
 ## 🌱 Funcionalidades Desenvolvidas
