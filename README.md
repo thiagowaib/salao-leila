@@ -70,7 +70,7 @@ yarn start
 
 <strong>Prints do Website estão disponíveis no repositório através <a href="https://github.com/thiagowaib/salao-leila/tree/main/Prints">desse link</a>.</strong>
 
-<img src="hhttps://media.giphy.com/media/dLB9P2bVLOLhQHj6Cr/giphy.gif?raw=true" alt="Demonstração Cliente">
+<img src="https://media.giphy.com/media/dLB9P2bVLOLhQHj6Cr/giphy.gif?raw=true" alt="Demonstração Cliente">
 
 <img src="https://media.giphy.com/media/UqWFH6CkGpfbWqLjp6/giphy.gif?raw=true" alt="Demonstração Admin">
 
